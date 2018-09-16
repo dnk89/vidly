@@ -12,11 +12,9 @@ app.get('/api/genres', (req, res) => {
 
 app.get('/api/genres/:id', (req, res) => {
     const genre = genres.find(g => g.id === parseInt(req.params.id));
-    if (genre) {
-        return res.send(genre);
-    } else {
-        return res.status(404).send('Genre with given ID not found');
-    }
+    if (!genre) return res.status(404).send('Genre with given ID not found');
+    
+    return res.send(genre);
 });
 
 app.post('/api/genres', (req, res) => {
